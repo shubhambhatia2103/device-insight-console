@@ -24,15 +24,15 @@ const DeviceTable: React.FC<DeviceTableProps> = ({ data, visibleColumns, searchT
   const getHealthBadgeColor = (health: string) => {
     switch (health.toLowerCase()) {
       case 'excellent':
-        return 'bg-green-500 text-white';
+        return 'bg-green-100 text-green-800 border-green-200';
       case 'good':
-        return 'bg-blue-500 text-white';
+        return 'bg-blue-100 text-blue-800 border-blue-200';
       case 'fair':
-        return 'bg-yellow-500 text-black';
+        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
       case 'poor':
-        return 'bg-red-500 text-white';
+        return 'bg-red-100 text-red-800 border-red-200';
       default:
-        return 'bg-gray-500 text-white';
+        return 'bg-gray-100 text-gray-800 border-gray-200';
     }
   };
 
@@ -52,12 +52,12 @@ const DeviceTable: React.FC<DeviceTableProps> = ({ data, visibleColumns, searchT
 
   if (data.length === 0) {
     return (
-      <Card className="bg-slate-800/50 border-slate-700">
+      <Card className="bg-white border-gray-200 shadow-sm">
         <CardContent className="pt-6">
           <div className="text-center py-12">
-            <Database className="w-16 h-16 text-slate-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">No Data Found</h3>
-            <p className="text-slate-400">
+            <Database className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No Data Found</h3>
+            <p className="text-gray-600">
               {searchTerm 
                 ? `No devices found matching "${searchTerm}"`
                 : "No device data available for the selected criteria"
@@ -70,15 +70,15 @@ const DeviceTable: React.FC<DeviceTableProps> = ({ data, visibleColumns, searchT
   }
 
   return (
-    <Card className="bg-slate-800/50 border-slate-700">
+    <Card className="bg-white border-gray-200 shadow-sm">
       <CardHeader>
-        <CardTitle className="text-white flex items-center justify-between">
+        <CardTitle className="text-gray-900 flex items-center justify-between">
           <span className="flex items-center gap-2">
-            <Database className="w-5 h-5 text-blue-400" />
+            <Database className="w-5 h-5 text-blue-600" />
             Device Data ({data.length} devices)
           </span>
           {searchTerm && (
-            <Badge variant="outline" className="text-blue-400 border-blue-400">
+            <Badge variant="outline" className="text-blue-600 border-blue-200">
               Filtered: "{searchTerm}"
             </Badge>
           )}
@@ -88,9 +88,9 @@ const DeviceTable: React.FC<DeviceTableProps> = ({ data, visibleColumns, searchT
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-slate-600">
+              <tr className="border-b border-gray-200">
                 {visibleColumns.map(column => (
-                  <th key={column} className="text-left p-4 text-slate-300 font-medium">
+                  <th key={column} className="text-left p-4 text-gray-700 font-medium bg-gray-50">
                     {column}
                   </th>
                 ))}
@@ -100,10 +100,10 @@ const DeviceTable: React.FC<DeviceTableProps> = ({ data, visibleColumns, searchT
               {currentData.map((device, index) => (
                 <tr
                   key={device.DeviceName}
-                  className="border-b border-slate-700 hover:bg-slate-700/50 transition-colors"
+                  className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
                 >
                   {visibleColumns.map(column => (
-                    <td key={column} className="p-4 text-slate-200">
+                    <td key={column} className="p-4 text-gray-900">
                       {formatCellValue(device[column as keyof DeviceData], column)}
                     </td>
                   ))}
@@ -115,8 +115,8 @@ const DeviceTable: React.FC<DeviceTableProps> = ({ data, visibleColumns, searchT
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-700">
-            <p className="text-sm text-slate-400">
+          <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
+            <p className="text-sm text-gray-600">
               Showing {startIndex + 1} to {Math.min(endIndex, data.length)} of {data.length} devices
             </p>
             <div className="flex items-center gap-2">
@@ -125,11 +125,11 @@ const DeviceTable: React.FC<DeviceTableProps> = ({ data, visibleColumns, searchT
                 size="sm"
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="bg-slate-700 border-slate-600 text-white hover:bg-slate-600"
+                className="bg-white border-gray-300 hover:bg-gray-50"
               >
                 <ChevronLeft className="w-4 h-4" />
               </Button>
-              <span className="text-sm text-slate-300 px-3">
+              <span className="text-sm text-gray-700 px-3">
                 Page {currentPage} of {totalPages}
               </span>
               <Button
@@ -137,7 +137,7 @@ const DeviceTable: React.FC<DeviceTableProps> = ({ data, visibleColumns, searchT
                 size="sm"
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="bg-slate-700 border-slate-600 text-white hover:bg-slate-600"
+                className="bg-white border-gray-300 hover:bg-gray-50"
               >
                 <ChevronRight className="w-4 h-4" />
               </Button>

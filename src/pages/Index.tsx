@@ -87,22 +87,22 @@ const Index = () => {
   const isDataReady = selectedOrg && dateFrom && dateTo;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+    <div className="min-h-screen bg-gray-50">
       <div className="container mx-auto p-6">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-white mb-2 flex items-center gap-3">
-            <Building2 className="text-blue-400" />
+          <h1 className="text-4xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+            <Building2 className="text-blue-600" />
             Device Monitoring Dashboard
           </h1>
-          <p className="text-slate-300">Monitor and analyze device performance across organizations</p>
+          <p className="text-gray-600">Monitor and analyze device performance across organizations</p>
         </div>
 
         {/* Top Controls */}
-        <Card className="mb-6 bg-slate-800/50 border-slate-700">
+        <Card className="mb-6 bg-white border-gray-200 shadow-sm">
           <CardHeader>
-            <CardTitle className="text-white flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-blue-400" />
+            <CardTitle className="text-gray-900 flex items-center gap-2">
+              <Calendar className="w-5 h-5 text-blue-600" />
               Configuration
             </CardTitle>
           </CardHeader>
@@ -110,14 +110,14 @@ const Index = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Organization Selector */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-300">Organization</label>
+                <label className="text-sm font-medium text-gray-700">Organization</label>
                 <Select value={selectedOrg} onValueChange={setSelectedOrg}>
-                  <SelectTrigger className="bg-slate-700 border-slate-600 text-white">
+                  <SelectTrigger className="bg-white border-gray-300">
                     <SelectValue placeholder="Select organization..." />
                   </SelectTrigger>
-                  <SelectContent className="bg-slate-700 border-slate-600">
+                  <SelectContent className="bg-white border-gray-200">
                     {organizations.map(org => (
-                      <SelectItem key={org} value={org} className="text-white hover:bg-slate-600">
+                      <SelectItem key={org} value={org} className="hover:bg-gray-50">
                         {org}
                       </SelectItem>
                     ))}
@@ -127,21 +127,21 @@ const Index = () => {
 
               {/* Date From */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-300">From Date</label>
+                <label className="text-sm font-medium text-gray-700">From Date</label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
                       className={cn(
-                        "w-full justify-start text-left font-normal bg-slate-700 border-slate-600 text-white hover:bg-slate-600",
-                        !dateFrom && "text-slate-400"
+                        "w-full justify-start text-left font-normal bg-white border-gray-300 hover:bg-gray-50",
+                        !dateFrom && "text-gray-400"
                       )}
                     >
                       <Calendar className="mr-2 h-4 w-4" />
                       {dateFrom ? format(dateFrom, "PPP") : "Pick a date"}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 bg-slate-700 border-slate-600">
+                  <PopoverContent className="w-auto p-0 bg-white border-gray-200">
                     <CalendarComponent
                       mode="single"
                       selected={dateFrom}
@@ -155,21 +155,21 @@ const Index = () => {
 
               {/* Date To */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-slate-300">To Date</label>
+                <label className="text-sm font-medium text-gray-700">To Date</label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
                       className={cn(
-                        "w-full justify-start text-left font-normal bg-slate-700 border-slate-600 text-white hover:bg-slate-600",
-                        !dateTo && "text-slate-400"
+                        "w-full justify-start text-left font-normal bg-white border-gray-300 hover:bg-gray-50",
+                        !dateTo && "text-gray-400"
                       )}
                     >
                       <Calendar className="mr-2 h-4 w-4" />
                       {dateTo ? format(dateTo, "PPP") : "Pick a date"}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 bg-slate-700 border-slate-600">
+                  <PopoverContent className="w-auto p-0 bg-white border-gray-200">
                     <CalendarComponent
                       mode="single"
                       selected={dateTo}
@@ -186,32 +186,32 @@ const Index = () => {
 
         {/* Controls Section - Only show when data is ready */}
         {isDataReady && (
-          <Card className="mb-6 bg-slate-800/50 border-slate-700">
+          <Card className="mb-6 bg-white border-gray-200 shadow-sm">
             <CardContent className="pt-6">
               <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
                 <div className="flex flex-col sm:flex-row gap-4 flex-1">
                   {/* Search */}
                   <div className="relative flex-1 max-w-md">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                     <Input
                       placeholder="Search device names..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 bg-slate-700 border-slate-600 text-white placeholder:text-slate-400"
+                      className="pl-10 bg-white border-gray-300 placeholder:text-gray-400"
                     />
                   </div>
 
                   {/* Column Filter */}
                   <Popover>
                     <PopoverTrigger asChild>
-                      <Button variant="outline" className="bg-slate-700 border-slate-600 text-white hover:bg-slate-600">
+                      <Button variant="outline" className="bg-white border-gray-300 hover:bg-gray-50">
                         <Filter className="w-4 h-4 mr-2" />
                         Columns ({visibleColumns.length})
                       </Button>
                     </PopoverTrigger>
-                    <PopoverContent className="w-80 bg-slate-700 border-slate-600 max-h-96 overflow-y-auto">
+                    <PopoverContent className="w-80 bg-white border-gray-200 max-h-96 overflow-y-auto">
                       <div className="space-y-3">
-                        <h4 className="font-medium text-white">Select Columns</h4>
+                        <h4 className="font-medium text-gray-900">Select Columns</h4>
                         {allColumns.map(column => (
                           <div key={column} className="flex items-center space-x-2">
                             <Checkbox
@@ -219,13 +219,13 @@ const Index = () => {
                               checked={visibleColumns.includes(column)}
                               onCheckedChange={(checked) => handleColumnToggle(column, !!checked)}
                               disabled={column === 'DeviceName'}
-                              className="border-slate-500"
+                              className="border-gray-300"
                             />
                             <label
                               htmlFor={column}
                               className={cn(
-                                "text-sm text-white cursor-pointer",
-                                column === 'DeviceName' && "text-slate-400"
+                                "text-sm text-gray-900 cursor-pointer",
+                                column === 'DeviceName' && "text-gray-400"
                               )}
                             >
                               {column}
@@ -254,12 +254,12 @@ const Index = () => {
 
         {/* Main Content */}
         {!isDataReady ? (
-          <Card className="bg-slate-800/50 border-slate-700">
+          <Card className="bg-white border-gray-200 shadow-sm">
             <CardContent className="pt-6">
               <div className="text-center py-12">
-                <Building2 className="w-16 h-16 text-slate-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">Get Started</h3>
-                <p className="text-slate-400">Please select an organization and date range to view device data</p>
+                <Building2 className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Get Started</h3>
+                <p className="text-gray-600">Please select an organization and date range to view device data</p>
               </div>
             </CardContent>
           </Card>
